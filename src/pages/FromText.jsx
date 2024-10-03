@@ -13,12 +13,13 @@ figlet.parseFont("3D-ASCII", _3d_ascii);
 const FromText = () => {
     const [art, setArt] = useState('');
     const [text, setText] = useState('Hola mundo');
+    const [font, setFont] = useState('Standard');
 
-    const fncGenerateArt = (textToArt) => {
+    const fncGenerateArt = (textToArt, fontArt) => {
         figlet.text(
             textToArt.trim(),
             {
-                font: "3D-ASCII",
+                font: fontArt,
                 horizontalLayout: "controlled smushing",
                 verticalLayout: "controlled smushing",
                 width: text.length * 120,
@@ -38,26 +39,26 @@ const FromText = () => {
             return;
         }
 
-        fncGenerateArt(text.trim());
+        fncGenerateArt(text.trim(), font.trim());
     }
 
     const handleBtnClean = () => {
         setArt('');
         setText('');
-        fncGenerateArt('');
+        fncGenerateArt('', font.trim());
         alert('Arte limpiado.');
     }
 
     const handleKeyDownEnter = (e) => {
         if (e.key === 'Enter') {
-            fncGenerateArt(text);
             e.preventDefault();
+            fncGenerateArt(text, font.trim());
         }
     }
 
     useEffect(() => {
-        fncGenerateArt('Hola mundo');
-    }, []);
+        fncGenerateArt(text, font);
+    }, [font]);
 
     return (
         <div className="h-screen flex flex-col gap-10 items-center">
@@ -71,6 +72,7 @@ const FromText = () => {
                         </label>
                         <textarea
                             type="text"
+                            required
                             id="text"
                             name="text"
                             value={text}
@@ -83,6 +85,22 @@ const FromText = () => {
                         <small className="text-white block">Presione Enter como atajo de teclado.</small>
                     </div>
                     <div className="mb-4">
+                        <label htmlFor="font" className="block font-bold text-lg text-white">Fuente</label>
+                        <select
+                            name="font"
+                            id="font"
+                            value={font}
+                            onChange={(e) => {
+                                setFont(e.target.value);
+                            }}
+                            className="block w-full py-2 px-2 rounded-md">
+                            <option value={'Standard'}>Standard</option>
+                            <option value={'Ghost'}>Ghost</option>
+                            <option value={'3D-ASCII'}>3D-ASCII</option>
+                        </select>
+                        <small className="text-white block">Seleccione un tipo de fuente para el Arte ASCII.</small>
+                    </div>
+                    <div className="mb-4">
                         <div className="flex justify-between">
                             <button className="bg-slate-800 py-2 px-4 rounded-md text-white">Generar</button>
                             <button type="button" onClick={handleBtnClean} className="bg-slate-800 py-2 px-4 rounded-md text-white">Limpiar</button>
@@ -92,9 +110,9 @@ const FromText = () => {
             </div>
 
             {/* Contenedor del arte ASCII */}
-            <div className="mt-4 mb-4 w-full overflow-auto shadow-xl">
+            <div className="mb-4 w-full overflow-auto shadow-xl">
                 <div className="p-4 bg-white border-slate-900 border-2 text-black rounded-lg">
-                    <pre className="whitespace-pre overflow-auto max-w-full h-[240px]">
+                    <pre className="whitespace-pre overflow-auto max-w-full h-[240px] text-center">
                         {art ? art : 'Ingrese un texto...'}
                     </pre>
                 </div>
