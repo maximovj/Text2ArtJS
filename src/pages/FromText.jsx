@@ -55,13 +55,13 @@ const FromText = () => {
 
     return (
         <div className="h-screen flex flex-col gap-10 items-center">
-            <div className="border-2 rounded-md p-4 w-min bg-teal-600 shadow-sm">
+            <div className="border-2 rounded-md p-4 w-min bg-white shadow-sm">
                 <div className="flex flex-col md:flex-row justify-between gap-8">
                     <form onSubmit={handleOnSubmit}>
                         <div className="mb-4">
                             <label
                                 htmlFor="text"
-                                className="block text-white font-bold text-lg my-2">
+                                className="block  font-bold text-lg my-2">
                                 Texto a Arte ASCII
                             </label>
                             <textarea
@@ -73,13 +73,13 @@ const FromText = () => {
                                 onChange={(e) => setText(e.target.value)}
                                 onKeyDown={handleKeyDownEnter}
                                 placeholder="Ingrese un texto..."
-                                className="block text-black px-2 py-2 rounded-md w-[400px] h-[120px] resize-none lg:w-[400px]">
+                                className="block text-black px-2 py-2 border-2 rounded-md w-[400px] h-[120px] resize-none lg:w-[400px]">
                             </textarea>
-                            <small className="text-white block">Ingrese un texto para convertirlo a Art ASCII</small>
-                            <small className="text-white block">Presione Enter como atajo de teclado.</small>
+                            <small className=" block">Ingrese un texto para convertirlo a Art ASCII</small>
+                            <small className=" block">Presione Enter como atajo de teclado.</small>
                         </div>
 
-                        <div className="mb-4">
+                        <div className="mt-6">
                             <div className="flex justify-between">
                                 <button className="bg-slate-800 py-2 px-4 rounded-md text-white">Generar</button>
                                 <button type="button" onClick={handleBtnClean} className="bg-slate-800 py-2 px-4 rounded-md text-white">Limpiar</button>
@@ -87,7 +87,7 @@ const FromText = () => {
                         </div>
                     </form>
                     <div className="mb-4">
-                        <label htmlFor="font" className="block text-white font-bold text-lg my-2">{fonts.length} Fuente ({font})</label>
+                        <label htmlFor="font" className="block  font-bold text-lg my-2">{fonts.length} Fuente ({font})</label>
                         <select
                             name="font"
                             id="font"
@@ -96,23 +96,21 @@ const FromText = () => {
                                 setFont(e.target.value);
                             }}
                             size={fonts.length}
-                            className="block w-full px-2 py-2 rounded-md h-[220px] md:w-[220px]">
+                            className="block w-full px-2 py-2 border-2 rounded-md h-[220px] md:w-[220px]">
                             {fonts.map(font => (
                                 <option key={font.name} value={font.name}>{font.name}</option>
                             ))}
                         </select>
-                        <small className="text-white block">Seleccione un tipo de fuente para el Arte ASCII.</small>
+                        <small className=" block">Seleccione un tipo de fuente para el Arte ASCII.</small>
                     </div>
                 </div>
             </div>
 
             {/* Contenedor del arte ASCII */}
-            <div className="mb-4 w-full overflow-auto shadow-xl">
-                <div className="p-4 bg-white border-slate-900 border-2 text-black rounded-lg">
-                    <pre className="whitespace-pre overflow-auto max-w-full h-[240px] text-center">
-                        {art ? art : 'Ingrese un texto...'}
-                    </pre>
-                </div>
+            <div className="mt-4 w-full overflow-auto" >
+                <pre className="bg-gray-100 border rounded-md p-4 text-center h-[340px]">
+                    {art ? art : 'Ingrese un texto...'}
+                </pre>
             </div>
         </div>
     )

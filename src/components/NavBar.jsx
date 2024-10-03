@@ -12,7 +12,7 @@ const NavBar = () => {
         <nav>
             <div className="flex rounded-lg gap-x-4 mt-1 items-center bg-slate-800 text-white">
                 <Link to={routes.Root}>
-                    <h3 className="bg-red-500 rounded-l-lg py-4 px-4 text-3xl">Text2ArtJS</h3>
+                    <h3 className="bg-gradient-to-b from-red-500 to-red-400 rounded-l-lg py-4 px-4 text-3xl">Text2ArtJS</h3>
                 </Link>
                 <ul className="flex gap-x-1">
                     {/* Home Link */}
