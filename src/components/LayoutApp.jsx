@@ -8,6 +8,7 @@ const LayoutApp = () => {
                 <nav className="py-2">
                     <ul>
                         <i><a href={routes.Root}>Home</a></i>
+                        <i><a href={routes.FromText}>Desde Texto</a></i>
                     </ul>
                 </nav>
             </header>
