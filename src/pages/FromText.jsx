@@ -54,9 +54,9 @@ const FromText = () => {
     }, [font]);
 
     return (
-        <div className="h-screen flex flex-col gap-10 items-center">
-            <div className="border-2 rounded-md p-4 w-min bg-white shadow-sm">
-                <div className="flex flex-col md:flex-row justify-between gap-8">
+        <div className="flex flex-col gap-10 md:items-center">
+            <div className="border-2 rounded-md p-4 bg-white shadow-sm lg:w-min">
+                <div className="flex flex-col justify-between gap-8 md:flex-row">
                     <form onSubmit={handleOnSubmit}>
                         <div className="mb-4">
                             <label
@@ -73,7 +73,7 @@ const FromText = () => {
                                 onChange={(e) => setText(e.target.value)}
                                 onKeyDown={handleKeyDownEnter}
                                 placeholder="Ingrese un texto..."
-                                className="block text-black px-2 py-2 border-2 rounded-md w-[400px] h-[120px] resize-none lg:w-[400px]">
+                                className="block text-black px-2 py-2 border-2 rounded-md w-full h-[120px] resize-none md:w-[400px]">
                             </textarea>
                             <small className=" block">Ingrese un texto para convertirlo a Art ASCII</small>
                             <small className=" block">Presione Enter como atajo de teclado.</small>
@@ -96,7 +96,7 @@ const FromText = () => {
                                 setFont(e.target.value);
                             }}
                             size={fonts.length}
-                            className="block w-full px-2 py-2 border-2 rounded-md h-[220px] md:w-[220px]">
+                            className="block w-full h-[100px] px-2 py-2 border-2 rounded-md lg:h-[220px] lg:md:w-[220px]">
                             {fonts.map(font => (
                                 <option key={font.name} value={font.name}>{font.name}</option>
                             ))}
@@ -107,11 +107,29 @@ const FromText = () => {
             </div>
 
             {/* Contenedor del arte ASCII */}
+            <div className="mb-8 w-full " >
+                <pre className="bg-gray-100 border overflow-auto rounded-md p-4 text-center h-[340px]">
+                    {art ? art : 'Ingrese un texto...'}
+                </pre>
+            </div>
+
+            {/*
+            <div className="mb-4 w-full overflow-auto shadow-xl">
+                <div className="p-4 bg-white  rounded-lg">
+                    <pre className="whitespace-pre overflow-auto max-w-full h-[240px] text-center">
+                        {art ? art : 'Ingrese un texto...'}
+                    </pre>
+                </div>
+            </div>
+            */}
+
+            {/* 
             <div className="mt-4 w-full overflow-auto" >
                 <pre className="bg-gray-100 border rounded-md p-4 text-center h-[340px]">
                     {art ? art : 'Ingrese un texto...'}
                 </pre>
             </div>
+            */}
         </div>
     )
 }
