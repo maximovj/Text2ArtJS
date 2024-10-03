@@ -1,6 +1,7 @@
-import LayoutApp from "./components/LayoutApp";
+import MainRoutes from "./routes/MainRoutes";
+
 const App = () => {
-  return (<LayoutApp />)
+  return (<MainRoutes />)
 }
 
 export default App
