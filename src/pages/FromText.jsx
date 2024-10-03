@@ -54,13 +54,13 @@ const FromText = () => {
 
     return (
         <div className="h-screen flex flex-col gap-10 items-center">
-            <div className="border-2 rounded-md p-4 w-min bg-teal-600">
+            <div className="border-2 rounded-md p-4 w-min bg-teal-600 shadow-sm">
                 <form onSubmit={handleOnSubmit}>
                     <div className="mb-4">
                         <label
                             htmlFor="text"
-                            className="block text-white">
-                            Texto
+                            className="block text-white font-bold text-lg my-2">
+                            Texto a Arte ASCII
                         </label>
                         <textarea
                             type="text"
@@ -68,7 +68,8 @@ const FromText = () => {
                             name="text"
                             value={text}
                             onChange={(e) => setText(e.target.value)}
-                            className="block text-black px-2 py-2 rounded-md w-[400px] lg:w-[700px]">
+                            placeholder="Ingrese un texto..."
+                            className="block text-black px-2 py-2 rounded-md w-[400px] h-[120px] resize-none lg:w-[700px]">
                         </textarea>
                         <small className="text-white">Ingrese un texto para convertirlo a Art ASCII</small>
                     </div>
