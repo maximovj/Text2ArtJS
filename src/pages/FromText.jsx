@@ -48,6 +48,13 @@ const FromText = () => {
         alert('Arte limpiado.');
     }
 
+    const handleKeyDownEnter = (e) => {
+        if (e.key === 'Enter') {
+            fncGenerateArt(text);
+            e.preventDefault();
+        }
+    }
+
     useEffect(() => {
         fncGenerateArt('Hola mundo');
     }, []);
@@ -68,10 +75,12 @@ const FromText = () => {
                             name="text"
                             value={text}
                             onChange={(e) => setText(e.target.value)}
+                            onKeyDown={handleKeyDownEnter}
                             placeholder="Ingrese un texto..."
                             className="block text-black px-2 py-2 rounded-md w-[400px] h-[120px] resize-none lg:w-[700px]">
                         </textarea>
-                        <small className="text-white">Ingrese un texto para convertirlo a Art ASCII</small>
+                        <small className="text-white block">Ingrese un texto para convertirlo a Art ASCII</small>
+                        <small className="text-white block">Presione Enter como atajo de teclado.</small>
                     </div>
                     <div className="mb-4">
                         <div className="flex justify-between">
@@ -86,7 +95,7 @@ const FromText = () => {
             <div className="mt-4 mb-4 w-full overflow-auto shadow-xl">
                 <div className="p-4 bg-white border-slate-900 border-2 text-black rounded-lg">
                     <pre className="whitespace-pre overflow-auto max-w-full h-[240px]">
-                        {art}
+                        {art ? art : 'Ingrese un texto...'}
                     </pre>
                 </div>
             </div>
