@@ -3,7 +3,7 @@ import routes from "../routes/routes";
 
 const LayoutApp = () => {
     return (
-        <div className="container mx-auto">
+        <div className="container lg:w-11/12 mx-auto">
             <header className="py-2">
                 <nav className="py-2">
                     <ul>
@@ -15,7 +15,7 @@ const LayoutApp = () => {
                 <MainRoutes />
             </main>
             <footer>
-                <p className="text-center py-4 bg-black text-white">Created by: Víctor J.</p>
+                <p className="text-center py-4 bg-slate-800 text-white">Created by: Víctor J.</p>
             </footer>
         </div>
     )
