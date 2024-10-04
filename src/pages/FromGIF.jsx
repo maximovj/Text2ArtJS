@@ -94,20 +94,22 @@ const App = () => {
 
     return (
         <div className="max-w-2xl mx-auto p-4">
-            <h1 className="text-3xl font-bold text-center mb-6">Extractor de Frames de GIF a ASCII</h1>
-
             {/* Contenedor flex para las tarjetas */}
-            <div className="flex flex-col bg-white p-6 mb-4">
+            <div className="flex flex-col border-2 rounded-md p-4 bg-white shadow-sm mb-4">
                 <div className="flex gap-x-8 mb-1">
                     {/* Tarjeta para la carga de imagen */}
                     <div className="bg-white w-full ">
-                        <h2 className="text-xl font-semibold mb-4">Frames ({frames.length})</h2>
+                        <label
+                            htmlFor="text"
+                            className="block  font-bold text-lg my-2">
+                            Frames de GIF a ASCII ({frames.length})
+                        </label>
                         {imagePreview ? (
-                            <div className="my-4">
+                            <div className="my-2">
                                 <img src={imagePreview} alt="Preview" className="max-w-full h-auto rounded-md lg:w-full lg:h-[200px]" />
                             </div>
                         ) : (
-                            <div className="my-4">
+                            <div className="my-2">
                                 <div className="max-w-full h-[120px] rounded-md bg-slate-200 border-2 sm:h-[200px] lg:w-full"></div>
                             </div>
                         )}
@@ -171,13 +173,13 @@ const App = () => {
                         setGifUrl(e.target.value);
                         setGifFile(null); // Limpiar archivo si se introduce una URL
                     }}
-                    placeholder="Introduce la URL del GIF"
+                    placeholder="Ingresa una URL de imagen GIF"
                     className="mb-4 p-2 border border-gray-300 rounded"
                 />
 
                 <button
                     onClick={extractFrames}
-                    className="bg-slate-800 hover:bg-slate-700 mb-4 px-4 py-2 text-white rounded"
+                    className="bg-slate-800 hover:bg-slate-700 text-white rounded-md py-2 px-4 transition duration-200 w-full"
                 >
                     Extraer frames
                 </button>
@@ -186,6 +188,12 @@ const App = () => {
             <canvas ref={canvasRef} className="hidden" />
 
             <div className="grid grid-cols-1 gap-4">
+                {
+                    frames.length == 0 && (<div className="bg-gray-100 border overflow-auto rounded-md p-4 h-[560px]">
+                        <small className="text-gray-600 text-center text-lg font-mono">Sube una imagen o ingresa una URL...</small>
+                    </div>)
+                }
+
                 {frames.map((frame, index) => (
                     <div key={index} style={{ fontFamily: 'monospace', fontSize: `${fontSize}px`, lineHeight: `${lineHeight}px` }}>
                         <pre className="whitespace-pre p-2 bg-gray-100 border rounded overflow-auto">
