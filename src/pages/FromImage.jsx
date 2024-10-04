@@ -132,6 +132,7 @@ const ImageToASCII = () => {
                         <small className="block mt-4 text-[12px] text-neutral-400">El tamaño generador a Arte ASCII es proporcional al tamaño de la imagen original</small>
                     </div>
                 </div>
+
                 {/* Input para cargar archivos */}
                 <input
                     type="file"
@@ -151,7 +152,7 @@ const ImageToASCII = () => {
 
                 <button
                     onClick={handleUrlSubmit}
-                    className="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-700 transition duration-200 w-full"
+                    className="bg-slate-800 text-white rounded-md py-2 px-4 hover:bg-slate-700 transition duration-200 w-full"
                 >
                     Convertir desde URL
                 </button>
