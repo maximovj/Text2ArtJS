@@ -58,7 +58,7 @@ const ImageToASCII = () => {
             {/* Contenedor flex para las tarjetas */}
             <div className="flex justify-between mb-4">
                 {/* Tarjeta para la carga de imagen */}
-                <div className="bg-white shadow-md rounded-lg p-6 w-full mr-2">
+                <div className="bg-white p-6 w-full ">
                     {imagePreview ? (
                         <div className="my-4">
                             <img src={imagePreview} alt="Preview" className="max-w-full h-auto rounded-md lg:w-full lg:h-[200px]" />
@@ -72,11 +72,10 @@ const ImageToASCII = () => {
                         onChange={handleImageUpload}
                         className="my-4 w-full text-center border border-gray-300 rounded-md p-2"
                     />
-                    <small className="text-xs">El tamaño generador a Arte ASCII es proporcional al tamaño de la imagen original</small>
                 </div>
 
                 {/* Tarjeta para ajustes de tamaño */}
-                <div className="bg-white shadow-md rounded-lg p-6 w-full ml-2">
+                <div className="bg-white p-6 w-full ">
                     <h2 className="text-xl font-semibold mb-4">Ajustes de Tamaño</h2>
                     <div className="mb-4">
                         <label className="block">Anchura: {fontSize}</label>
@@ -102,6 +101,7 @@ const ImageToASCII = () => {
                             className="w-full"
                         />
                     </div>
+                    <small className="block mt-4 text-[12px] text-neutral-400">El tamaño generador a Arte ASCII es proporcional al tamaño de la imagen original</small>
                 </div>
             </div>
 
