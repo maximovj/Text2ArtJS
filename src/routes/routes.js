@@ -5,6 +5,7 @@ const routes = {
     Root: '/',
     FromText: '/from-text',
     FromImage: '/from-image',
+    FromGIF: '/from-gif',
     Error404: '*',
 }
 
