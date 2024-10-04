@@ -4,7 +4,7 @@ import NavBar from "./NavBar";
 const LayoutApp = () => {
     return (
         <div className="flex flex-col min-h-screen">
-            <header className="container mx-auto mb-8 lg:mt-1 lg:mb-4">
+            <header className="container mx-auto mb-8 sm:mt-1 sm:mb-8">
                 <NavBar />
             </header>
             <main className="flex-grow lg:m-8">
