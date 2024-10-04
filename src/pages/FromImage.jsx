@@ -65,6 +65,8 @@ const ImageToASCII = () => {
         const file = event.target.files[0];
         if (file) {
             const imageSrc = URL.createObjectURL(file);
+            setFontSize(1);
+            setLineHeight(1);
             setImagePreview(imageSrc);
             handleImageUpload(imageSrc);
         }
@@ -73,6 +75,8 @@ const ImageToASCII = () => {
     // Manejador de imágenes desde URL
     const handleUrlSubmit = () => {
         if (imageUrl) {
+            setFontSize(1);
+            setLineHeight(1);
             setImagePreview(imageUrl);
             handleImageUpload(imageUrl);
         }
@@ -83,73 +87,74 @@ const ImageToASCII = () => {
             <h1 className="text-3xl font-bold text-center mb-6">Convert Image to ASCII Art</h1>
 
             {/* Contenedor flex para las tarjetas */}
-            <div className="flex justify-between mb-4">
-                {/* Tarjeta para la carga de imagen */}
-                <div className="bg-white p-6 w-full ">
-                    {imagePreview ? (
-                        <div className="my-4">
-                            <img src={imagePreview} alt="Preview" className="max-w-full h-auto rounded-md lg:w-full lg:h-[200px]" />
-                        </div>
-                    ) : (
-                        <div className="my-4">
-                            <div className="max-w-full h-[120px] rounded-md bg-slate-200 border-2 sm:h-[200px] lg:w-full"></div>
-                        </div>
-                    )}
-
-                    {/* Input para cargar archivos */}
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleFileChange}
-                        className="my-4 w-full text-center border border-gray-300 rounded-md p-2"
-                    />
-
-                    {/* Input para URL */}
-                    <input
-                        type="text"
-                        value={imageUrl}
-                        onChange={(e) => setImageUrl(e.target.value)}
-                        placeholder="Ingresa una URL de imagen"
-                        className="my-4 w-full text-center border border-gray-300 rounded-md p-2"
-                    />
-
-                    <button
-                        onClick={handleUrlSubmit}
-                        className="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-700 transition duration-200 w-full"
-                    >
-                        Convertir desde URL
-                    </button>
-                </div>
-
-                {/* Tarjeta para ajustes de tamaño */}
-                <div className="bg-white p-6 w-full ">
-                    <h2 className="text-xl font-semibold mb-4">Ajustes de Tamaño</h2>
-                    <div className="mb-4">
-                        <label className="block">Anchura: {fontSize}</label>
-                        <input
-                            type="range"
-                            min={0.1}
-                            step={0.1}
-                            max={5}
-                            value={fontSize}
-                            onChange={(e) => setFontSize(e.target.value)}
-                            className="w-full"
-                        />
+            <div className="flex flex-col bg-white p-6 mb-4">
+                <div className="flex gap-x-8 mb-1">
+                    {/* Tarjeta para la carga de imagen */}
+                    <div className="bg-white w-full ">
+                        {imagePreview ? (
+                            <div className="my-4">
+                                <img src={imagePreview} alt="Preview" className="max-w-full h-auto rounded-md lg:w-full lg:h-[200px]" />
+                            </div>
+                        ) : (
+                            <div className="my-4">
+                                <div className="max-w-full h-[120px] rounded-md bg-slate-200 border-2 sm:h-[200px] lg:w-full"></div>
+                            </div>
+                        )}
                     </div>
-                    <div>
-                        <label className="block">Altura: {lineHeight}</label>
-                        <input
-                            type="range"
-                            min={0.1}
-                            step={0.1}
-                            max={5}
-                            value={lineHeight}
-                            onChange={(e) => setLineHeight(e.target.value)}
-                            className="w-full"
-                        />
+
+                    {/* Tarjeta para ajustes de tamaño */}
+                    <div className="bg-white w-full ">
+                        <h2 className="text-xl font-semibold mb-4">Ajustes de Tamaño</h2>
+                        <div className="mb-4">
+                            <label className="block">Anchura: {fontSize}</label>
+                            <input
+                                type="range"
+                                min={0.1}
+                                step={0.1}
+                                max={5}
+                                value={fontSize}
+                                onChange={(e) => setFontSize(e.target.value)}
+                                className="w-full"
+                            />
+                        </div>
+                        <div>
+                            <label className="block">Altura: {lineHeight}</label>
+                            <input
+                                type="range"
+                                min={0.1}
+                                step={0.1}
+                                max={5}
+                                value={lineHeight}
+                                onChange={(e) => setLineHeight(e.target.value)}
+                                className="w-full"
+                            />
+                        </div>
+                        <small className="block mt-4 text-[12px] text-neutral-400">El tamaño generador a Arte ASCII es proporcional al tamaño de la imagen original</small>
                     </div>
-                    <small className="block mt-4 text-[12px] text-neutral-400">El tamaño generador a Arte ASCII es proporcional al tamaño de la imagen original</small>
                 </div>
+                {/* Input para cargar archivos */}
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="mb-2 w-full text-center border border-gray-300 rounded-md p-2"
+                />
+
+                {/* Input para URL */}
+                <input
+                    type="text"
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                    placeholder="Ingresa una URL de imagen"
+                    className="mb-2 w-full text-center border border-gray-300 rounded-md p-2"
+                />
+
+                <button
+                    onClick={handleUrlSubmit}
+                    className="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-700 transition duration-200 w-full"
+                >
+                    Convertir desde URL
+                </button>
             </div>
 
             <canvas ref={canvasRef} className="hidden"></canvas>
