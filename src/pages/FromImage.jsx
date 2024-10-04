@@ -6,28 +6,29 @@ const ImageToASCII = () => {
     const [fontSize, setFontSize] = useState(1);
     const [lineHeight, setLineHeight] = useState(1);
     const [imagePreview, setImagePreview] = useState(null);
+    const [imageUrl, setImageUrl] = useState(''); // Estado para la URL de la imagen
     const canvasRef = useRef(null);
     const asciiChars = '@#%8&WMZ?+~:,. ';
 
-    const handleImageUpload = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            setImagePreview(URL.createObjectURL(file));
-            setLoading(true);
-            const image = new Image();
-            image.src = URL.createObjectURL(file);
+    // Función que maneja la lógica de la conversión a ASCII desde un archivo o URL
+    const handleImageUpload = (imageSource) => {
+        setLoading(true);
+        const image = new Image();
+        image.crossOrigin = "Anonymous";  // Añadir CORS
+        image.src = imageSource;
 
-            image.onload = () => {
-                const canvas = canvasRef.current;
-                const ctx = canvas.getContext('2d');
-                const targetWidth = 640;
-                const scaleWidth = image.width > targetWidth ? targetWidth : image.width;
-                const scaleHeight = (image.height / image.width) * scaleWidth;
+        image.onload = () => {
+            const canvas = canvasRef.current;
+            const ctx = canvas.getContext('2d');
+            const targetWidth = 640;
+            const scaleWidth = image.width > targetWidth ? targetWidth : image.width;
+            const scaleHeight = (image.height / image.width) * scaleWidth;
 
-                canvas.width = scaleWidth;
-                canvas.height = scaleHeight;
-                ctx.drawImage(image, 0, 0, scaleWidth, scaleHeight);
+            canvas.width = scaleWidth;
+            canvas.height = scaleHeight;
+            ctx.drawImage(image, 0, 0, scaleWidth, scaleHeight);
 
+            try {
                 const imageData = ctx.getImageData(0, 0, scaleWidth, scaleHeight);
                 const pixels = imageData.data;
 
@@ -46,8 +47,34 @@ const ImageToASCII = () => {
                 }
 
                 setAsciiArt(ascii);
+            } catch (error) {
+                console.error('Error al obtener la imagen:', error);
+            } finally {
                 setLoading(false);
-            };
+            }
+        };
+
+        image.onerror = () => {
+            console.error('Error al cargar la imagen.');
+            setLoading(false);
+        };
+    };
+
+    // Manejador de archivos locales
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const imageSrc = URL.createObjectURL(file);
+            setImagePreview(imageSrc);
+            handleImageUpload(imageSrc);
+        }
+    };
+
+    // Manejador de imágenes desde URL
+    const handleUrlSubmit = () => {
+        if (imageUrl) {
+            setImagePreview(imageUrl);
+            handleImageUpload(imageUrl);
         }
     };
 
@@ -63,15 +90,35 @@ const ImageToASCII = () => {
                         <div className="my-4">
                             <img src={imagePreview} alt="Preview" className="max-w-full h-auto rounded-md lg:w-full lg:h-[200px]" />
                         </div>
-                    ) : (<div className="my-4">
-                        <div className="max-w-full h-[120px] rounded-md bg-slate-200 border-2 sm:h-[200px] lg:w-full"></div>
-                    </div>)}
+                    ) : (
+                        <div className="my-4">
+                            <div className="max-w-full h-[120px] rounded-md bg-slate-200 border-2 sm:h-[200px] lg:w-full"></div>
+                        </div>
+                    )}
+
+                    {/* Input para cargar archivos */}
                     <input
                         type="file"
                         accept="image/*"
-                        onChange={handleImageUpload}
+                        onChange={handleFileChange}
                         className="my-4 w-full text-center border border-gray-300 rounded-md p-2"
                     />
+
+                    {/* Input para URL */}
+                    <input
+                        type="text"
+                        value={imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
+                        placeholder="Ingresa una URL de imagen"
+                        className="my-4 w-full text-center border border-gray-300 rounded-md p-2"
+                    />
+
+                    <button
+                        onClick={handleUrlSubmit}
+                        className="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-700 transition duration-200 w-full"
+                    >
+                        Convertir desde URL
+                    </button>
                 </div>
 
                 {/* Tarjeta para ajustes de tamaño */}
@@ -108,13 +155,13 @@ const ImageToASCII = () => {
             <canvas ref={canvasRef} className="hidden"></canvas>
 
             {/* Contenedor para el arte ASCII */}
-            <div className='bg-gray-100 border overflow-auto rounded-md p-4 h-[560px]'>
-                <div style={{ fontFamily: 'monospace', fontSize: `${fontSize}px`, lineHeight: `${lineHeight}px`, }}>
+            <div className="bg-gray-100 border overflow-auto rounded-md p-4 h-[560px]">
+                <div style={{ fontFamily: 'monospace', fontSize: `${fontSize}px`, lineHeight: `${lineHeight}px` }}>
                     {loading ? (
                         <p className="text-center text-lg">Cargando...</p>
                     ) : (
                         <pre className="whitespace-pre-wrap text-black">
-                            {asciiArt ? asciiArt : <small className='text-gray-600 text-center text-lg'>Sube una imagen ...</small>}
+                            {asciiArt ? asciiArt : <small className="text-gray-600 text-center text-lg">Sube una imagen o ingresa una URL...</small>}
                         </pre>
                     )}
                 </div>
