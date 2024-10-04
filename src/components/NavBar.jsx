@@ -41,6 +41,13 @@ const NavBar = () => {
                             </i>
                         </Link>
 
+                        {/* Desde Texto Link */}
+                        <Link to={routes.FromGIF} className={`py-4 px-2 relative after:content-[''] after:absolute after:w-0 after:h-1 after:bottom-0 after:left-0 after:bg-white hover:after:w-full after:transition-all after:duration-300 ${handleActiveLink(routes.FromGIF)}`}>
+                            <i>
+                                Desde GIF
+                            </i>
+                        </Link>
+
                     </ul>
                 </div>
             </div>

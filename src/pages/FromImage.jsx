@@ -100,7 +100,7 @@ const ImageToASCII = () => {
 
                 <button
                     onClick={handleUrlSubmit}
-                    className="bg-slate-800 text-white rounded-md py-2 px-4 hover:bg-slate-700 transition duration-200 w-full"
+                    className="bg-slate-800 hover:bg-slate-700 text-white rounded-md py-2 px-4 transition duration-200 w-full"
                 >
                     Convertir desde URL
                 </button>
