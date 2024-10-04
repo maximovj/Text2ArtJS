@@ -101,7 +101,7 @@ const App = () => {
                     <div className="bg-white w-full ">
                         <label
                             htmlFor="text"
-                            className="block  font-bold text-lg my-2">
+                            className="block font-bold text-lg my-2">
                             Frames de GIF a ASCII ({frames.length})
                         </label>
                         {imagePreview ? (
@@ -117,7 +117,7 @@ const App = () => {
 
                     {/* Tarjeta para ajustes de tamaño */}
                     <div className="bg-white w-full ">
-                        <h2 className="text-xl font-semibold mb-4">Ajustes de Tamaño</h2>
+                        <h2 className="block font-bold text-lg my-2">Ajustes de Tamaño</h2>
                         <div className="mb-4">
                             <label className="block">Anchura: {fontSize}</label>
                             <input

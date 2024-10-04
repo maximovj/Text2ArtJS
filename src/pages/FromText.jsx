@@ -61,7 +61,7 @@ const FromText = () => {
                         <div className="mb-4">
                             <label
                                 htmlFor="text"
-                                className="block  font-bold text-lg my-2">
+                                className="block font-bold text-lg my-2">
                                 Texto a Arte ASCII
                             </label>
                             <textarea
@@ -81,13 +81,13 @@ const FromText = () => {
 
                         <div className="mt-6">
                             <div className="flex justify-between">
-                                <button className="bg-slate-800 py-2 px-4 rounded-md text-white">Generar</button>
-                                <button type="button" onClick={handleBtnClean} className="bg-slate-800 py-2 px-4 rounded-md text-white">Limpiar</button>
+                                <button className="bg-slate-800 hover:bg-slate-700 py-2 px-4 rounded-md text-white">Generar</button>
+                                <button type="button" onClick={handleBtnClean} className="bg-slate-800 hover:bg-slate-700 py-2 px-4 rounded-md text-white">Limpiar</button>
                             </div>
                         </div>
                     </form>
                     <div className="mb-4">
-                        <label htmlFor="font" className="block  font-bold text-lg my-2">{fonts.length} Fuente ({font})</label>
+                        <label htmlFor="font" className="block font-bold text-lg my-2">{fonts.length} Fuente ({font})</label>
                         <select
                             name="font"
                             id="font"
