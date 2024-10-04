@@ -4,6 +4,7 @@ const routes = {
     BaseName: baseUrl,
     Root: '/',
     FromText: '/from-text',
+    FromImage: '/from-image',
     Error404: '*',
 }
 

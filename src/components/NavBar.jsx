@@ -1,10 +1,8 @@
-import { useState } from "react";
 import routes from "../routes/routes";
 import { Link, useLocation } from "react-router-dom";
 
 const NavBar = () => {
     const location = useLocation();
-    const [showMenu, setShowMenu] = useState(true);
 
     const handleActiveLink = (route) => {
         return location.pathname === route ? 'after:w-full' : '';
@@ -19,7 +17,7 @@ const NavBar = () => {
                 <div className="text-center">
 
                     <ul className={`flex flex-row items-center gap-x-1 transition-all duration-500 sm:flex-row sm:p-0
-                    ${showMenu ? 'max-h-full max-w-[300px] overflow-x-auto whitespace-nowrap opacity-100' : 'max-h-0 max-w-[300px] overflow-x-auto whitespace-nowrap opacity-0'}
+                    max-h-full max-w-[300px] overflow-x-auto whitespace-nowrap opacity-100
                     sm:max-w-full
                     `}>
                         {/* Home Link */}
@@ -33,6 +31,13 @@ const NavBar = () => {
                         <Link to={routes.FromText} className={`py-4 px-2 relative after:content-[''] after:absolute after:w-0 after:h-1 after:bottom-0 after:left-0 after:bg-white hover:after:w-full after:transition-all after:duration-300 ${handleActiveLink(routes.FromText)}`}>
                             <i>
                                 Desde Texto
+                            </i>
+                        </Link>
+
+                        {/* Desde Texto Link */}
+                        <Link to={routes.FromImage} className={`py-4 px-2 relative after:content-[''] after:absolute after:w-0 after:h-1 after:bottom-0 after:left-0 after:bg-white hover:after:w-full after:transition-all after:duration-300 ${handleActiveLink(routes.FromImage)}`}>
+                            <i>
+                                Desde Imagen
                             </i>
                         </Link>
 
