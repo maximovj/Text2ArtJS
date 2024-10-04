@@ -32,26 +32,29 @@ const ImageToASCII = () => {
 
     return (
         <div className="max-w-2xl mx-auto p-4">
-            <h1 className="text-3xl font-bold text-center mb-6">Convert Image to ASCII Art</h1>
-
             {/* Contenedor flex para las tarjetas */}
-            <div className="flex flex-col bg-white p-6 mb-4">
+            <div className="flex flex-col border-2 rounded-md p-4 bg-white shadow-sm mb-4">
                 <div className="flex gap-x-8 mb-1">
                     {/* Tarjeta para la carga de imagen */}
                     <div className="bg-white w-full ">
+                        <label
+                            htmlFor="text"
+                            className="block  font-bold text-lg my-2">
+                            Imagen a Arte ASCII
+                        </label>
                         {imagePreview ? (
-                            <div className="my-4">
+                            <div className="my-2">
                                 <img src={imagePreview} alt="Preview" className="max-w-full h-auto rounded-md lg:w-full lg:h-[200px]" />
                             </div>
                         ) : (
-                            <div className="my-4">
+                            <div className="my-2">
                                 <div className="max-w-full h-[120px] rounded-md bg-slate-200 border-2 sm:h-[200px] lg:w-full"></div>
                             </div>
                         )}
                     </div>
 
                     {/* Tarjeta para ajustes de tamaño */}
-                    <div className="bg-white w-full ">
+                    <div className="bg-white w-full">
                         <h2 className="text-xl font-semibold mb-4">Ajustes de Tamaño</h2>
                         <div className="mb-4">
                             <label className="block">Anchura: {fontSize}</label>
@@ -86,7 +89,7 @@ const ImageToASCII = () => {
                     type="file"
                     accept="image/*"
                     onChange={handleFileChange}
-                    className="mb-2 w-full text-center border border-gray-300 rounded-md p-2"
+                    className="mb-4 p-2 border border-gray-300 rounded"
                 />
 
                 {/* Input para URL */}
@@ -95,7 +98,7 @@ const ImageToASCII = () => {
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                     placeholder="Ingresa una URL de imagen"
-                    className="mb-2 w-full text-center border border-gray-300 rounded-md p-2"
+                    className="mb-4 p-2 border border-gray-300 rounded"
                 />
 
                 <button
