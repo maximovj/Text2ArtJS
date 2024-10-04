@@ -1,64 +1,12 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
+import { useImageToAscii } from '../hooks/useImageToAscii';
 
 const ImageToASCII = () => {
-    const [asciiArt, setAsciiArt] = useState('');
-    const [loading, setLoading] = useState(false);
     const [fontSize, setFontSize] = useState(1);
     const [lineHeight, setLineHeight] = useState(1);
     const [imagePreview, setImagePreview] = useState(null);
     const [imageUrl, setImageUrl] = useState(''); // Estado para la URL de la imagen
-    const canvasRef = useRef(null);
-    const asciiChars = '@#%8&WMZ?+~:,. ';
-
-    // Función que maneja la lógica de la conversión a ASCII desde un archivo o URL
-    const handleImageUpload = (imageSource) => {
-        setLoading(true);
-        const image = new Image();
-        image.crossOrigin = "Anonymous";  // Añadir CORS
-        image.src = imageSource;
-
-        image.onload = () => {
-            const canvas = canvasRef.current;
-            const ctx = canvas.getContext('2d');
-            const targetWidth = 640;
-            const scaleWidth = image.width > targetWidth ? targetWidth : image.width;
-            const scaleHeight = (image.height / image.width) * scaleWidth;
-
-            canvas.width = scaleWidth;
-            canvas.height = scaleHeight;
-            ctx.drawImage(image, 0, 0, scaleWidth, scaleHeight);
-
-            try {
-                const imageData = ctx.getImageData(0, 0, scaleWidth, scaleHeight);
-                const pixels = imageData.data;
-
-                let ascii = '';
-                for (let i = 0; i < pixels.length; i += 4) {
-                    const r = pixels[i];
-                    const g = pixels[i + 1];
-                    const b = pixels[i + 2];
-                    const brightness = (r + g + b) / 3;
-                    const asciiIndex = Math.floor((brightness / 255) * (asciiChars.length - 1));
-                    ascii += asciiChars[asciiIndex];
-
-                    if ((i / 4 + 1) % scaleWidth === 0) {
-                        ascii += '\n';
-                    }
-                }
-
-                setAsciiArt(ascii);
-            } catch (error) {
-                console.error('Error al obtener la imagen:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        image.onerror = () => {
-            console.error('Error al cargar la imagen.');
-            setLoading(false);
-        };
-    };
+    const { asciiArt, loading, handleImageUpload, Canvas } = useImageToAscii();
 
     // Manejador de archivos locales
     const handleFileChange = (event) => {
@@ -158,7 +106,7 @@ const ImageToASCII = () => {
                 </button>
             </div>
 
-            <canvas ref={canvasRef} className="hidden"></canvas>
+            <Canvas></Canvas>
 
             {/* Contenedor para el arte ASCII */}
             <div className="bg-gray-100 border overflow-auto rounded-md p-4 h-[560px]">
