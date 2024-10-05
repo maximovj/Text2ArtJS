@@ -1,4 +1,4 @@
-# SecureKeyJS
+# Text2ArtJS
 
 Este repositorio contiene una práctica sobre ReactJS.
 
