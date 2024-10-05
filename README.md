@@ -8,7 +8,8 @@ Consiste en crear un sitio web (single page) para generar Arte ASCII basado en T
 
 - Proyecto dockerizado. (*)
 - Proyecto vagratizado. (*)
-- Notificaciones de sistema.
+- Notificaciones de sistema. (*)
+- Descarga de archivos.
 - Estilos de Tailwind CSS
 - Componentes funcionales de ReactJS
 - Hooks personalizados
