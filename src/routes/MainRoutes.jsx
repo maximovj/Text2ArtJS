@@ -5,13 +5,14 @@ import FromText from "../pages/FromText.jsx";
 import LayoutApp from "../components/LayoutApp";
 import FromImage from "../pages/FromImage.jsx";
 import FromGIF from "../pages/FromGIF.jsx";
+import Root from "../pages/Root.jsx";
 
 const MainRoutes = () => {
     return (
         <BrowserRouter basename={routes.BaseName}>
             <Routes>
                 <Route path={routes.Root} element={<LayoutApp />}>
-                    <Route path={routes.Root} element={<h1>Página de root</h1>} />
+                    <Route path={routes.Root} element={<Root />} />
                     <Route path={routes.FromText} element={<FromText />} />
                     <Route path={routes.FromImage} element={<FromImage />} />
                     <Route path={routes.FromGIF} element={<FromGIF />} />
